@@ -217,6 +217,13 @@ pip-log.txt
 *.bdf
 *.tdb
 *.log
+*.cmp
+*.vhd
+*.tcl
+*.hex
+*.inc
+*.do
+*.ppf
 \db
 \incremental_db
 \output_files
