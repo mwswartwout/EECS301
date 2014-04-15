@@ -1,6 +1,6 @@
-module DAC(gainedOut, dacSerialClock, ldac, dIn, syncDAC);
+module DAC(adcDataOutPackage, dacSerialClock, ldac, dIn, syncDAC);
 
-input [11:0] gainedOut;
+input [7:0] adcDataOutPackage;
 input dacSerialClock, syncDAC;
 
 reg powerUp; 
@@ -56,46 +56,45 @@ always @(posedge dacSerialClock)
 							dIn = 0;
 							
 						else if (count < 12)
-							dIn = gainedOut[11];
+							dIn = 0;
 							
 						else if (count < 13)
-							dIn = gainedOut[10];
+							dIn = 0;
 							
 						else if (count < 14)
-							dIn = gainedOut[9];
+							dIn = 0;
 							
 						else if (count < 15)
-							dIn = gainedOut[8];
+							dIn = 0;
 							
 						else if (count < 16)
-							dIn = gainedOut[7];
+							dIn = adcDataOutPackage[7];
 							
 						else if (count < 17)
-							dIn = gainedOut[6];
+							dIn = adcDataOutPackage[6];
 							
 						else if (count < 18)
-							dIn = gainedOut[5];
+							dIn = adcDataOutPackage[5];
 							
 						else if (count < 19)
-							dIn = gainedOut[4];
+							dIn = adcDataOutPackage[4];
 							
 						else if (count < 20)
-							dIn = gainedOut[3];
+							dIn = adcDataOutPackage[3];
 							
 						else if (count < 21)
-							dIn = gainedOut[2];
+							dIn = adcDataOutPackage[2];
 							
 						else if (count < 22)
-							dIn = gainedOut[1];
+							dIn = adcDataOutPackage[1];
 							
 						else if (count < 23)
-							dIn = gainedOut[0];
+							dIn = adcDataOutPackage[0];
 							
 						else if (count < 30)
 							dIn = 0;
 			end
 		count = count + 1;
-		
 		
 		end
 		
