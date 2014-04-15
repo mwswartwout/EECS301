@@ -1,6 +1,6 @@
-module Lab4(fpgaClock, adcDataOut, ldac, dacDataIn, syncDAC, dacSerialClock, adcSerialClock, syncADC, adcDataIn);
+module Lab4(fpgaClock/*, adcDataOut*/, ldac, dacDataIn, syncDAC, dacSerialClock, adcSerialClock, syncADC, adcDataIn);
 
-input fpgaClock, adcDataOut;
+input fpgaClock/*, adcDataOut*/;
 
 wire syncDAC, syncADC;
 wire [11:0] dataDAC;
@@ -11,5 +11,5 @@ output ldac, dacDataIn, syncDAC, dacSerialClock, adcSerialClock, syncADC, adcDat
 PLL PLL(fpgaClock, dacSerialClock, adcSerialClock); //Both serial clocks are 16MHz
 clock clock(dacSerialClock, syncDAC, syncADC);
 DAC DAC(dataDAC, dacSerialClock, ldac, adcDataOutPackage, syncDAC);
-ADC ADC(adcSerialClock, syncADC, adcDataOut, adcDataOutPackage, adcDataIn);
+ADC ADC(adcSerialClock, syncADC/*, adcDataOut*/, adcDataOutPackage, adcDataIn);
 endmodule 
