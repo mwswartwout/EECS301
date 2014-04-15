@@ -7,9 +7,7 @@ integer countSync;
 output reg syncDAC, syncADC;
 
 initial
-	begin
 		countSync = 0;
-	end
 
 always @(posedge serialClock)
 	begin
