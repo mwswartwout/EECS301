@@ -9,7 +9,7 @@ wire [8:0] adcDataOutPackage;
 output ldac, dacDataIn, syncDAC, dacSerialClock, adcSerialClock, syncADC, adcDataIn;
 
 PLL PLL(fpgaClock, dacSerialClock, adcSerialClock); //Both serial clocks are 16MHz
-clock clock(dacSerialClock, syncDAC);
+clock clock(dacSerialClock, syncDAC, syncADC);
 DAC DAC(dataDAC, dacSerialClock, ldac, dacDataIn, syncDAC);
 ADC ADC(adcSerialClock, syncADC, adcDataOut, adcDataOutPackage, adcDataIn);
 endmodule 

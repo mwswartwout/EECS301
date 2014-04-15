@@ -1,20 +1,33 @@
-module clock(serialClock, syncDAC);
+module clock(serialClock, syncDAC, syncADC);
 
 input serialClock; //16 MHz
-output reg syncDAC;
-integer countSyncDAC;
+
+integer countSync;
+
+output reg syncDAC, syncADC;
+
+initial
+	begin
+		countSync = 0;
+	end
 
 always @(posedge serialClock)
 	begin
 	
-		countSyncDAC = countSyncDAC + 1;
-		if (countSyncDAC == 32)
+		//Control block for syncDAC pulse
+		countSync = countSync + 1;
+		if (countSync == 32)
 			syncDAC = 1;
-				
-		else if (countSyncDAC == 64) // Must stay low for 2 microseconds = 32 serialClock pules
+			
+		//Control block for syncADC pulse
+		if (countSync == 16)
+			syncADC = 1;
+			
+		else if (countSync == 64) //Delay makes it so that syncADC and syncDAC pulses are aligned
 			begin
+				syncADC = 0;
 				syncDAC = 0;
-				countSyncDAC = 0;
+				countSync = 0;
 			end
 	end
 endmodule
