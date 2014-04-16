@@ -1,10 +1,9 @@
-module ADC(adcSerialClock, syncADC/*, adcDataOut*/, adcDataOutPackage, adcDataIn);
+module ADC(adcSerialClock, syncADC, adcDataOut, adcDataOutPackage, adcDataIn);
 
-input adcSerialClock, syncADC/*, adcDataOut*/;
+input adcSerialClock, syncADC, adcDataOut;
 
 integer count;
 reg [1:0] powerUp;
-reg adcDataOut = 1;
 
 output reg [7:0] adcDataOutPackage;
 output reg adcDataIn;

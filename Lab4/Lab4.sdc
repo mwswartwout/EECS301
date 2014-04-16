@@ -23,9 +23,7 @@
 
 # Clock constraints
 
-create_clock -name "fpgaClock" -period 20.000ns [get_ports {fpgaClock}]
-create_clock -name "dacSerialClock" -period 62.500ns [get_ports {dacSerialClock}]
-create_clock -name "adcSerialClock" -period 62.500ns [get_ports {adcSerialClock}]
+create_clock -name "serialClock" -period 62.500ns [get_ports {dacSerialClock}]
 
 
 # Automatically constrain PLL and other generated clocks
