@@ -3,7 +3,7 @@ module Lab4(fpgaClock, adcDataOut, ldac, dacDataIn, syncDAC, dacSerialClock, adc
 input fpgaClock, adcDataOut;
 
 wire syncDAC, syncADC;
-wire [7:0] adcDataOutPackage;
+wire [11:0] adcDataOutPackage;
 
 output ldac, dacDataIn, syncDAC, dacSerialClock, adcSerialClock, syncADC, adcDataIn;
 

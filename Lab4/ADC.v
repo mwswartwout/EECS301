@@ -5,7 +5,7 @@ input adcSerialClock, syncADC, adcDataOut;
 integer count;
 reg [1:0] powerUp;
 
-output reg [7:0] adcDataOutPackage;
+output reg [11:0] adcDataOutPackage;
 output reg adcDataIn;
 
 initial
@@ -47,20 +47,28 @@ always @(posedge adcSerialClock)
 							
 						//Control block for reading from adcDataOut and packaging into adcDataOutPackage
 						if (count == 4)
-							adcDataOutPackage[7] = adcDataOut;
+							adcDataOutPackage[11] = adcDataOut;
 						else if (count == 5)
-							adcDataOutPackage[6] = adcDataOut;
+							adcDataOutPackage[10] = adcDataOut;
 						else if (count == 6)
-							adcDataOutPackage[5] = adcDataOut;
+							adcDataOutPackage[9] = adcDataOut;
 						else if (count == 7)
-							adcDataOutPackage[4] = adcDataOut;
+							adcDataOutPackage[8] = adcDataOut;
 						else if (count == 8)
-							adcDataOutPackage[3] = adcDataOut;
+							adcDataOutPackage[7] = adcDataOut;
 						else if (count == 9)
-							adcDataOutPackage[2] = adcDataOut;
+							adcDataOutPackage[6] = adcDataOut;
 						else if (count == 10)
-							adcDataOutPackage[1] = adcDataOut;
+							adcDataOutPackage[5] = adcDataOut;
 						else if (count == 11)
+							adcDataOutPackage[4] = adcDataOut;
+						else if (count == 12)
+							adcDataOutPackage[3] = adcDataOut;
+						else if (count == 13)
+							adcDataOutPackage[2] = adcDataOut;
+						else if (count == 14)
+							adcDataOutPackage[1] = adcDataOut;
+						else if (count == 15)
 							adcDataOutPackage[0] = adcDataOut;
 					end
 			end
