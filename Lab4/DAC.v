@@ -1,4 +1,4 @@
-module DAC(adcDataOutPackage, dacSerialClock, ldac, dIn, syncDAC);
+module DAC(adcDataOutPackage, dacSerialClock, ldac, dacDataIn, syncDAC);
 
 input [7:0] adcDataOutPackage;
 input dacSerialClock, syncDAC;
@@ -6,13 +6,13 @@ input dacSerialClock, syncDAC;
 reg powerUp; 
 integer count;
 
-output reg ldac, dIn;
+output reg ldac, dacDataIn;
 
 initial
 	begin
 		ldac = 0;
 		count = 0;
-		dIn = 0;
+		dacDataIn = 0;
 		powerUp = 0;
 	end
 	
@@ -23,16 +23,16 @@ always @(posedge dacSerialClock)
 			if (~powerUp)
 				begin
 					if (count < 3)
-						dIn = 0;
+						dacDataIn = 0;
 						
 					else if (count < 4)
-						dIn = 0;
+						dacDataIn = 0;
 				
 					else if (count < 5)
-						dIn = 1;
+						dacDataIn = 1;
 					
 					else if (count < 31)
-						dIn = 0;
+						dacDataIn = 0;
 						
 					else if (count == 31)
 						begin
@@ -44,55 +44,55 @@ always @(posedge dacSerialClock)
 		else
 			begin
 						if (count < 3)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 5)
-							dIn = 0;
+							dacDataIn = 0;
 						
 						else if (count < 6)
-							dIn = 1;
+							dacDataIn = 1;
 						
 						else if (count < 11)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 12)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 13)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 14)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 15)
-							dIn = 0;
+							dacDataIn = 0;
 							
 						else if (count < 16)
-							dIn = adcDataOutPackage[7];
+							dacDataIn = adcDataOutPackage[7];
 							
 						else if (count < 17)
-							dIn = adcDataOutPackage[6];
+							dacDataIn = adcDataOutPackage[6];
 							
 						else if (count < 18)
-							dIn = adcDataOutPackage[5];
+							dacDataIn = adcDataOutPackage[5];
 							
 						else if (count < 19)
-							dIn = adcDataOutPackage[4];
+							dacDataIn = adcDataOutPackage[4];
 							
 						else if (count < 20)
-							dIn = adcDataOutPackage[3];
+							dacDataIn = adcDataOutPackage[3];
 							
 						else if (count < 21)
-							dIn = adcDataOutPackage[2];
+							dacDataIn = adcDataOutPackage[2];
 							
 						else if (count < 22)
-							dIn = adcDataOutPackage[1];
+							dacDataIn = adcDataOutPackage[1];
 							
 						else if (count < 23)
-							dIn = adcDataOutPackage[0];
+							dacDataIn = adcDataOutPackage[0];
 							
 						else if (count < 30)
-							dIn = 0;
+							dacDataIn = 0;
 			end
 		count = count + 1;
 		
