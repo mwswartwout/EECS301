@@ -1,19 +1,24 @@
-module cloking(clk50mhz, vgaclk, hsync, vsync, hden, vden);
+module cloking(clk50mhz, vgaclk, hsync, vsync, hden, vden, clk3Hz);
 
 input clk50mhz;         // PIN_G21
 input vgaclk;          
 
-integer vgaCount, hcount, vcount;
+integer vgaCount, hcount, vcount, hzcount /*, startCount*/;
 reg hden, vden;			// horizontal data enable, vertical data enable
+//reg start;					// to output 10 black frames at teh start
 
 output reg hsync, vsync;    	// 640 vgaclk to 1 hsync, 480 hsync to 1 vsync
 										// OR, timing diagram says 
 														// 41+484 vgaclk to 1 hsync
 														// 10+276 hsync to 1 vsync
 output hden, vden;		// enable signals for data transfer
+output reg clk3Hz;		// character change clock 3 Hz
+
 				
 initial
 	begin	
+		// startCount = 0;
+		// start = 1;
 		hsync = 0;
 		vsync = 0;
 		hden  = 0;
@@ -21,10 +26,15 @@ initial
 		vgaCount = 0;
 		hcount   = 0;
 		vcount   = 0;	// TODO: determine if vcount is needed
+		hzcount = 0;
+		clk3Hz  = 0;
 	end
-				
+
+	
 always @(posedge vgaclk)
 	begin
+
+	
 		// vgacounter and hsync controller
 		vgaCount = vgaCount + 1;
 		if (vgaCount == 0)
@@ -57,6 +67,15 @@ always @(posedge vgaclk)
 				vsync = ~vsync;
 				vcount = vcount + 1;
 			end
+		
+		// clock for user input
+		hzcount = hzcount + 1;
+		if (hzcount == 4000000)
+			begin	
+				clk3Hz = ~clk3Hz;
+				hzcount = 0;
+			end
+			
 	end
 	
 
