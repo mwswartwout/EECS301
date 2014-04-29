@@ -16,15 +16,15 @@
 #
 # -------------------------------------------------------------------------- #
 #
-# Quartus II 64-Bit
-# Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-# Date created = 16:26:25  April 28, 2014
+# Quartus II 32-bit
+# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+# Date created = 13:00:08  April 16, 2014
 #
 # -------------------------------------------------------------------------- #
 
-QUARTUS_VERSION = "13.1"
-DATE = "16:26:25  April 28, 2014"
+QUARTUS_VERSION = "13.0"
+DATE = "13:00:08  April 16, 2014"
 
 # Revisions
 
-PROJECT_REVISION = "VGALab"
+PROJECT_REVISION = "vgalab"

@@ -1,4 +1,4 @@
-module cloking(clk50mhz, vgaclk, hsync, vsync, hden, vden, clk3Hz);
+module cloking(clk50mhz, vgaclk, hsync, vsync, hden, vden, clk3Hz, start);
 
 input clk50mhz;         // PIN_G21
 input vgaclk;          
@@ -18,7 +18,7 @@ output reg clk3Hz;		// character change clock 3 Hz
 initial
 	begin	
 		// startCount = 0;
-		// start = 1;
+		start = 1;
 		hsync = 0;
 		vsync = 0;
 		hden  = 0;
@@ -66,6 +66,20 @@ always @(posedge vgaclk)
 				hcount = 0;
 				vsync = ~vsync;
 				vcount = vcount + 1;
+			end
+			
+		if (start == 1 && vcount == 10) 		// hard reset everything but "start"
+			begin	
+				start = 0;
+				hsync = 0;
+				vsync = 0;
+				hden  = 0;
+				vden  = 0;
+				vgaCount = 0;
+				hcount   = 0;
+				vcount   = 0;	
+				hzcount = 0;
+				clk3Hz  = 0;
 			end
 		
 		// clock for user input
