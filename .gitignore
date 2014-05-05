@@ -196,7 +196,6 @@ pip-log.txt
 *.qip
 *.qip
 *.qmsg
-*.qpf
 *.qsf
 *.qws
 *.rcfdb
