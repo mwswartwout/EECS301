@@ -8,14 +8,15 @@ wire [24:0]	characterPixels;																	// output from ROM that contains pi
 wire clk3Hz;																						// clk for gathering user input (on rising edge)
 wire [9:0] vgaCount;
 wire [8:0] lineCount;
+wire start;
 
 output wire [7:0] redPixels, greenPixels, bluePixels;
 output wire clk9MHz, hSync, vSync, disp;	
 
-syncPulses		syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz, disp);   		// controls: the clocks that determine overall timing
+syncPulses		syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz, disp, vgaCount, lineCount, start);   		// controls: the clocks that determine overall timing
 altpll0			PLL(clk50MHz, clk9MHz);                     							// generates: 9 MHz clock
 userInput 		userInput(button1, button0, characterAddress, clk3Hz);			// controls: the user input
 characterROM	characterROM(characterAddress, clk9MHz, characterPixels);		// ROM that contains pixel data for the 13 different characters
-pixelOutput		pixelOutput(clk9MHz, characterPixels, redPixels, greenPixels, bluePixels, vgaCount, lineCount);
+pixelOutput		pixelOutput(clk9MHz, characterPixels, redPixels, greenPixels, bluePixels, vgaCount, lineCount, start);
 	
 endmodule
