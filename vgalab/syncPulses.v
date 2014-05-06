@@ -16,14 +16,12 @@ output reg clk3Hz;		// character change clock 3 Hz
 				
 initial
 	begin	
-		// startCount = 0;
 		hSync = 0;
 		vSync = 0;
 		hData  = 0;
 		vData  = 0;
 		vgaCount = 0;
 		lineCount   = 0;
-		vcount   = 0;	// TODO: determine if vcount is needed
 		hzcount = 0;
 		clk3Hz  = 0;
 	end
@@ -61,7 +59,6 @@ always @(posedge clk9MHz)
 			begin	
 				lineCount = 0;
 				vSync = 0;
-				vcount = vcount + 1;
 			end
 			
 		/* I can't see why this is necessary
