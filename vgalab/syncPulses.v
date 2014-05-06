@@ -1,4 +1,4 @@
-module syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz);
+module syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz, disp);
 
 input clk9MHz;          
 
@@ -11,7 +11,7 @@ output reg hSync, vSync;    	// 640 clk9MHz to 1 hSync, 480 hSync to 1 vSync
 														// 41+484 clk9MHz to 1 hSync
 														// 10+276 hSync to 1 vSync
 output hData, vData;		// enable signals for data transfer
-output reg clk3Hz;		// character change clock 3 Hz
+output reg clk3Hz, disp;		// character change clock 3 Hz
 
 				
 initial
@@ -24,6 +24,7 @@ initial
 		lineCount   = 0;
 		hzcount = 0;
 		clk3Hz  = 0;
+		disp = 1;
 	end
 
 	
