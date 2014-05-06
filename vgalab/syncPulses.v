@@ -1,8 +1,10 @@
-module syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz, disp);
+module syncPulses(clk9MHz, hSync, vSync, hData, vData, clk3Hz, disp, vgaCount, lineCount);
 
 input clk9MHz;          
 
-integer vgaCount, lineCount, vcount, hzcount;
+integer vcount, hzcount;
+output reg [9:0] vgaCount;
+output reg [8:0] lineCount;
 reg hData, vData;			// horizontal data enable, vertical data enable
 //reg start;					// to output 10 black frames at the start
 
@@ -20,8 +22,8 @@ initial
 		vSync = 0;
 		hData  = 0;
 		vData  = 0;
-		vgaCount = 0;
-		lineCount   = 0;
+		vgaCount	= 0;
+		lineCount = 0;
 		hzcount = 0;
 		clk3Hz  = 0;
 		disp = 1;
@@ -31,7 +33,7 @@ initial
 always @(posedge clk9MHz)
 	begin
 		// vgaCount counts clock cycles and controls hSync pulses, vgaCount can also be used to determine the horizontal location of the pixel being set
-		vgaCount = vgaCount + 1;
+		vgaCount = vgaCount + 10'b0000000001;
 		if (vgaCount == 0)
 			hSync = 0;
 		if (vgaCount == 41)
@@ -44,7 +46,7 @@ always @(posedge clk9MHz)
 			begin	
 				vgaCount = 0;						// reset vgaCount
 				hSync = 0;				// invert hSync
-				lineCount = lineCount + 1;				// increment lineCount
+				lineCount = lineCount + 9'b000000001;				// increment lineCount
 			end
 		
 		// lineCount controls vSync
