@@ -1,0 +1,13 @@
+
+
+C:/Users/Matthew/Dropbox/Documents/CWRU/Semester 4/EECS 301/EECS301/finalProject/PLL.v
+
+May 06 03PM:58:19>: The following design file, which has identical name but a different extension 
+from the specified variation file, already exists in the working directory:
+
+PLL.bdf
+
+This may create a conflict of design files and/or lead to undesirable side
+effects.
+
+Is it OK to continue file generation?
