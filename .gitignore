@@ -223,6 +223,15 @@ pip-log.txt
 *.inc
 *.do
 *.ppf
+*.sip
+*.spd
+*.f
+*.lib
+*.var
+*.sh
+*.setup
+*.sip
+*.sdc
 \db
 \incremental_db
 \output_files
