@@ -1,4 +1,4 @@
-module finalProject(fpgaClock, adcDataOut, adcSerialClock, dacSerialClock, lcdClock, ldac, adcDataIn, dacDataIn, disp, redPixels, greenPixels, bluePixels);
+module finalProject(fpgaClock, adcDataOut, adcSerialClock, dacSerialClock, lcdClock, ldac, adcDataIn, dacDataIn, disp, hSync, vSync, redPixels, greenPixels, bluePixels);
 
 input wire fpgaClock, adcDataOut;
 
@@ -8,11 +8,10 @@ wire sinkValid, highPassOutValid, lowPassOutValid; //Valid signals from the filt
 wire [11:0] highPassOutput, lowPassOutput; //12-bit output from the filters
 wire [1:0]	highPassError, lowPassError; //Output error from the filters, these are ignored completely
 wire start;	//Forces pixelOutput to display 10 black frames upon start-up of LCD screen
-wire hSync, vSync; //hSync and vSync pulses for the LCD screen
 wire [9:0] vgaCount; //10-bit counter that tracks horizontal location of the pixel being drawn
 wire [8:0] lineCount; //9-bit counter that tracks the vertical location of the pixel being drawn
 
-output wire adcSerialClock, dacSerialClock, lcdClock, adcDataIn, ldac, dacDataIn, disp;
+output wire adcSerialClock, dacSerialClock, lcdClock, adcDataIn, ldac, dacDataIn, disp, hSync, vSync;
 output wire [7:0] redPixels, greenPixels, bluePixels; //8-bit values for setting RGB pixels on the LCD screen
 
 PLL	PLL(fpgaClock, adcSerialClock, dacSerialClock, lcdClock); //PLL built using Altera MegaFunction; Input is 50MHz clock from FPGA, output is two 16MHz serial clocks (for DAC & ADC) and a 9MHz clock for the LCD.
