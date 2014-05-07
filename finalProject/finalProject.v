@@ -16,5 +16,6 @@ DAC	DAC(highPassOutput, dacSerialClock, ldac, dacDataIn, syncDAC); //DAC block p
 clock	clock(dacSerialClock, syncDAC, syncADC, sinkValid); //Clock creates the sync pulses for the ADC and DAC so that they are receiving and outputting data at the same time
 highPass highPass(dacSerialClock, 1, adcDataOutPackage, sinkValid, 2'b00, highPassOutput, highPassOutValid, highPassError); //FIR high pass filter, coefficients obtained using Altera FIR Compiler I
 lowPass	lowPass(dacSerialClock, 1, adcDataOutPackage, sinkValid, 2'b00, lowPassOutput, lowPassOutValid, lowPassError);	//FIR low pass filter, coefficients obtained using online FIR coefficient calculator
+pixelOutput	pixelOutput(lcdClock, highPassOutput, lowPassOutput, redPixels, greenPixels, bluePixels, vgaCount, lineCount, start); //Determines what colors are being set for the pixel being drawn
 
 endmodule
