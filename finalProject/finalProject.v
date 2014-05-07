@@ -12,7 +12,7 @@ output wire adcSerialClock, dacSerialClock, lcdClock, adcDataIn, ldac, dacDataIn
 
 PLL	PLL(fpgaClock, adcSerialClock, dacSerialClock, lcdClock); //PLL built using Altera MegaFunction; Input is 50MHz clock from FPGA, output is two 16MHz serial clocks (for DAC & ADC) and a 9MHz clock for the LCD.
 ADC	ADC(adcSerialClock, syncADC, adcDataOut, adcDataOutPackage, adcDataIn); //ADC block sends dataIn to the ADC and takes dataOut and packages it.
-DAC	DAC(/*adcDataOutPackage went here in wire lab, this should change*/, dacSerialClock, ldac, dacDataIn, syncDAC); //DAC block packages data for DAC and sends it
+DAC	DAC(highPassOutput, dacSerialClock, ldac, dacDataIn, syncDAC); //DAC block packages data for DAC and sends it
 clock	clock(dacSerialClock, syncDAC, syncADC, sinkValid); //Clock creates the sync pulses for the ADC and DAC so that they are receiving and outputting data at the same time
 highPass highPass(dacSerialClock, 1, adcDataOutPackage, sinkValid, 2'b00, highPassOutput, highPassOutValid, highPassError); //FIR high pass filter
 lowPass	lowPass(dacSerialClock, 1, adcDataOutPackage, sinkValid, 2'b00, lowPassOutput, lowPassOutValid, lowPassError);	//FIR low pass filter	
