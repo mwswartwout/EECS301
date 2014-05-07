@@ -1,8 +1,7 @@
-module finalProject(fpgaClock, adcDataOut, adcSerialClock, dacSerialClock, lcdClock, ldac, adcDataIn, dacDataIn, disp, hSync, vSync, redPixels, greenPixels, bluePixels);
+module finalProject(fpgaClock, adcDataOut, adcSerialClock, dacSerialClock, lcdClock, ldac, adcDataIn, dacDataIn, disp, hSync, vSync, syncADC, syncDAC, redPixels, greenPixels, bluePixels);
 
 input wire fpgaClock, adcDataOut;
 
-wire syncADC, syncDAC;	//Sync pulses for the ADC and DAC
 wire [11:0] adcDataOutPackage; //Data coming out of the ADC after it has been packaged by the ADC block
 wire sinkValid, highPassOutValid, lowPassOutValid; //Valid signals from the filters (sinkValid = input, outValid = output)
 wire [11:0] highPassOutput, lowPassOutput; //12-bit output from the filters
@@ -11,7 +10,9 @@ wire start;	//Forces pixelOutput to display 10 black frames upon start-up of LCD
 wire [9:0] vgaCount; //10-bit counter that tracks horizontal location of the pixel being drawn
 wire [8:0] lineCount; //9-bit counter that tracks the vertical location of the pixel being drawn
 
-output wire adcSerialClock, dacSerialClock, lcdClock, adcDataIn, ldac, dacDataIn, disp, hSync, vSync;
+output wire adcSerialClock, dacSerialClock, lcdClock, adcDataIn, ldac, dacDataIn, disp;
+output wire hSync, vSync;
+output wire syncADC, syncDAC; //sync/cs pulses for ADC/DAC
 output wire [7:0] redPixels, greenPixels, bluePixels; //8-bit values for setting RGB pixels on the LCD screen
 
 PLL	PLL(fpgaClock, adcSerialClock, dacSerialClock, lcdClock); //PLL built using Altera MegaFunction; Input is 50MHz clock from FPGA, output is two 16MHz serial clocks (for DAC & ADC) and a 9MHz clock for the LCD.
